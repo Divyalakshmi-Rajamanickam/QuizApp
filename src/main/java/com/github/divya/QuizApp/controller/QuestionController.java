@@ -1,6 +1,13 @@
 package com.github.divya.QuizApp.controller;
 
 import com.github.divya.QuizApp.model.QuestionModel;
+import com.github.divya.QuizApp.service.QuestionService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,49 +15,33 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity
-@Table(name = "question")
-public class QuestionController implements java.io.Serializable{
+@Controller
+@RequestMapping("question")
+public class QuestionController{
 
-    private static final long serialVersionUID = 1L;
-    private Integer id;
-    private String content;
-    private Set<AnswerController> answers = new HashSet<AnswerController>(0);
+    @Autowired
+    private QuestionService questionService;
 
-    public QuestionController() {
+    @RequestMapping(method = RequestMethod.GET)
+    public String index(ModelMap modelMap){
+        modelMap.put("questions",questionService.findAll());
+        return "question/index";
     }
 
-    public QuestionController(String content){
-        this.content = content;
+    @RequestMapping(value="submit", method = RequestMethod.POST)
+    public String submit(HttpServletRequest request){
+        int score = 0;
+        String []questionIds = request.getParameterValues("questionId");
+        for(String questionId : questionIds){
+            int answerIdCorrect = questionService.findAnswerIdConnect(Integer.parseInt(questionId));
+            if(answerIdCorrect == Integer.parseInt(request.getParameter("question_" + questionId))){
+                score++;
+            }
+        }
+        request.setAttribute("score",score);
+        return "question/result";
     }
 
-    public QuestionController(String content, Set<AnswerController> answers){
-        this.content = content;
-        this.answers = answers;
-    }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
-    public Integer getId(){
-        return this.id;
-    }
-    public void setId(Integer id){
-        this.id = id;
-    }
-
-    @Column(name = "content", nullable = false, length = 65535)
-    public String getContent(){
-        return  this.content;
-    }
-
-    public void setContent(String content){
-        this.content = content;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    public Set<AnswerController> getAnswers(){
-        return this.answers;
-    }
 
 }

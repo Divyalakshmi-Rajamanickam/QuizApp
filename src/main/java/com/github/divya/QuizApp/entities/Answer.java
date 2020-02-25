@@ -1,4 +1,8 @@
-package com.github.divya.QuizApp.controller;
+package com.github.divya.QuizApp.entities;
+
+
+
+import com.github.divya.QuizApp.controller.QuestionController;
 
 import javax.persistence.*;
 
@@ -6,18 +10,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "answer")
-public class AnswerController implements java.io.Serializable {
+public class Answer implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer id;
-    private QuestionController question;
+    private Question question;
     private String content;
     private boolean correct;
 
-    public AnswerController() {
+    public Answer() {
     }
 
-    public AnswerController(QuestionController question,String content, boolean correct){
+    public Answer(Question question,String content, boolean correct){
         this.question = question;
         this.content = content;
         this.correct = correct ;
@@ -37,11 +41,11 @@ public class AnswerController implements java.io.Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question id", nullable = false)
 
-    public QuestionController getQuestion(){
+    public Question getQuestion(){
         return this.question;
     }
 
-    public void setQuestion(QuestionController question) {
+    public void setQuestion(Question question) {
         this.question = question;
     }
 

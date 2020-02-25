@@ -1,4 +1,9 @@
 package com.github.divya.QuizApp.service;
 
-public class QuestionService {
+import com.github.divya.QuizApp.entities.Question;
+
+public interface QuestionService {
+    public Iterable<Question> findAll();
+    public int findAnswerIdConnect(int questionId);
+
 }
