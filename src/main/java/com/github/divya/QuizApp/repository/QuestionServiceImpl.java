@@ -1,3 +1,4 @@
+/*
 package com.github.divya.QuizApp.repository;
 
 import com.github.divya.QuizApp.entities.Answer;
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Service;
 @Service("questionService")
 public class QuestionServiceImpl implements QuestionService {
 
-    @Autowired
+    */
+/*@Autowired
     private QuestionRepository questionRepository;
     @Override
     public Iterable<Question> findAll() {
@@ -27,3 +29,4 @@ public class QuestionServiceImpl implements QuestionService {
         return -1;
     }
 }
+*/
