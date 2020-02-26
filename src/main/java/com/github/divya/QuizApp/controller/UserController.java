@@ -1,6 +1,7 @@
 //package com.github.divya.QuizApp.controller;
 //
 //import com.github.divya.QuizApp.entities.User;
+//import com.github.divya.QuizApp.service.UserService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.*;
@@ -18,13 +19,7 @@
 //            return "users";
 //        }
 //
-//        @RequestMapping(value="/records")
-//        public @ResponseBody UserListDto getUsers() {
 //
-//            UserListDto userListDto = new UserListDto();
-//            userListDto.setUsers(service.readAll());
-//            return userListDto;
-//        }
 //
 //        @RequestMapping(value="/get")
 //        public @ResponseBody User get(@RequestBody User user) {
@@ -37,18 +32,15 @@
 //                @RequestParam String password,
 //                @RequestParam String firstName,
 //                @RequestParam String lastName,
-//                @RequestParam Integer role) {
-//
-//            Role newRole = new Role();
-//            newRole.setRole(role);
+//                @RequestParam String email) {
 //
 //            User newUser = new User();
-//            newUser.setUsername(username);
+//
+//            newUser.setUserName(username);
 //            newUser.setPassword(password);
 //            newUser.setFirstName(firstName);
 //            newUser.setLastName(lastName);
-//            newUser.setRole(newRole);
-//
+//            newUser.setEmail(email);
 //            return service.create(newUser);
 //        }
 //
@@ -57,16 +49,21 @@
 //                @RequestParam String username,
 //                @RequestParam String firstName,
 //                @RequestParam String lastName,
-//                @RequestParam Integer role) {
+//                @RequestParam String password,
+//                @RequestParam String email,
+//                @RequestParam String type)
 //
-//            Role existingRole = new Role();
-//            existingRole.setRole(role);
+//
+//                 {
+//
 //
 //            User existingUser = new User();
-//            existingUser.setUsername(username);
+//            existingUser.setUserName(username);
 //            existingUser.setFirstName(firstName);
 //            existingUser.setLastName(lastName);
-//            existingUser.setRole(existingRole);
+//            existingUser.setPassword(password);
+//            existingUser.setEmail(email);
+//            existingUser.setEmail(type);
 //
 //            return service.update(existingUser);
 //        }
@@ -76,7 +73,7 @@
 //                @RequestParam String username) {
 //
 //            User existingUser = new User();
-//            existingUser.setUsername(username);
+//            existingUser.setUserName(username);
 //
 //            return service.delete(existingUser);
 //        }

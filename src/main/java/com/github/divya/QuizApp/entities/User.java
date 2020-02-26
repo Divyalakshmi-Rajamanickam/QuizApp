@@ -20,11 +20,11 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String userName, String password, String firsrName, String lastName, String email, String type) {
+    public User(int userId, String userName, String password, String firstName, String lastName, String email, String type) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
-        this.firstName = firsrName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.type = type;
